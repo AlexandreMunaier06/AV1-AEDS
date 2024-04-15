@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void jogo(int portaEscolhida) {
+    srand(time(NULL));
+    int portaPremiada, portaVazia;
+    char opcao;
+    portaPremiada = rand() % 3 + 1;
+    
+    if (portaPremiada == 1 && portaEscolhida == 1 || portaPremiada == 1 && portaEscolhida == 2 || portaPremiada == 2 && portaEscolhida == 1 || portaPremiada == 2 && portaEscolhida == 2) {
+        portaVazia = 3;
+    } else if (portaPremiada == 1 && portaEscolhida == 3 || portaPremiada == 3 && portaEscolhida == 3 || portaPremiada == 3 && portaEscolhida == 1) {
+        portaVazia = 2;
+    } else {
+        portaVazia = 1;
+    }
+    
+    printf("O apresentador abriu a porta %d que está vazia.", portaVazia);
+    printf("\nVocê deseja trocar para a outra porta?(s/n): ");
+    scanf(" %c", &opcao);
+    
+    if (opcao == 'n') {
+        if (portaEscolhida == portaPremiada) {
+            printf("Você ganhou. A porta premiada era %d!", portaPremiada);
+        } else {
+            printf("Você perdeu. A porta premiada era %d!", portaPremiada);
+        }
+    }
+    if (opcao == 's') {
+        if (portaEscolhida == 1 && portaVazia == 2 || portaEscolhida == 2 && portaVazia == 1) {
+            portaEscolhida == 3;
+        } else if (portaEscolhida == 3 && portaVazia == 1 || portaEscolhida == 1 && portaVazia == 3) {
+            portaEscolhida = 2;
+        } else {
+            portaEscolhida = 1;
+        }
+         if (portaEscolhida == portaPremiada) {
+             printf("Você trocou para a porta %d.", portaEscolhida);
+            printf("\nVocê ganhou. A porta premiada era %d!", portaPremiada, portaEscolhida);
+        } else {
+            printf("Você trocou para a porta %d.", portaEscolhida);
+            printf("\nVocê perdeu. A porta premiada era %d!", portaPremiada);
+        }
+    }
+    
+}
+
+int main() {
+    int portaEscolhida;
+    
+    printf("Bem-vindo ao jogo Monty Hall!");
+    printf("Escolha uma porta(1, 2 ou 3): ");
+    scanf("%d", &portaEscolhida);
+    jogo(portaEscolhida);
+    
+    return 0;
+}
